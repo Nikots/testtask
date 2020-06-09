@@ -36,16 +36,8 @@ public class HomePage {
         } else { Assert.fail("Tag " + tagName + "is absent in filtering."); }
     }
 
-    public List<WebElement> getArticlesTagLists() {
-        return driver.findElements(By.className("tag-list"));
-    }
-
     public List<WebElement> getAllFoundTagsOnPage() {
         return driver.findElements(By.xpath("//*[@class='tag-default tag-pill tag-outline ng-binding ng-scope']"));
-    }
-
-    public void getArticlePreviews() {
-        List<WebElement> previews = driver.findElements(By.className("article-preview"));
     }
 
     public List<WebElement> getTagsForFirstArticlePreview() {
