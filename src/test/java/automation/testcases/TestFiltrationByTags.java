@@ -1,31 +1,32 @@
 package automation.testcases;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import realword.automation.BaseTest;
 import realword.automation.HomePage;
 
+import static org.testng.Assert.assertTrue;
+
 public class TestFiltrationByTags extends BaseTest {
 
     protected WebDriver driver;
     protected HomePage homePage;
 
-    @BeforeTest(description = "initialize driver")
+    @BeforeTest(description = "Initialize driver")
     public void init() {
         this.driver = getDriver();
         this.homePage = new HomePage(driver);
         this.homePage.go();
     }
 
-    @Test (description = "Check if any article review is found by tag filtering.")
+    @Test(description = "Check if any article review is found by tag filtering.")
     public void checkFirstArticlePreviewContainsSelectedTag() {
         String tagName = "as";
         homePage.selectTag(tagName);
 
-        Assert.assertTrue(homePage.getTagsForFirstArticlePreview().stream()
+        assertTrue(homePage.getTagsForFirstArticlePreview().stream()
                 .filter(tagElement -> tagElement.getText().trim().equalsIgnoreCase(tagName)).count() == 1);
     }
 
@@ -34,18 +35,18 @@ public class TestFiltrationByTags extends BaseTest {
         String tagName = "butt";
         homePage.selectTag(tagName);
 
-        Assert.assertTrue(homePage.getAllFoundTagsOnPage().stream()
+        assertTrue(homePage.getAllFoundTagsOnPage().stream()
                 .filter(tagElement -> tagElement.getText().trim().equalsIgnoreCase(tagName)).count() == 10);
     }
 
-    @Test (description = "Check tag with current name is absent in filtering.")
+    @Test(description = "Check tag with current name is absent in filtering.")
     public void checkTagIsAbsentInFiltering() {
         String tagName = "absenttag";
 
-        Assert.assertTrue(homePage.findTagInFiltering(tagName).isEmpty());
+        assertTrue(homePage.findTagInFiltering(tagName).isEmpty());
     }
 
-    @AfterTest(description = "close browser")
+    @AfterTest(description = " Close browser")
     public void tearDown() {
         if (null != this.driver) {
             this.driver.quit();
