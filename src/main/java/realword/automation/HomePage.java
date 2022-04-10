@@ -33,7 +33,7 @@ public class HomePage {
             findTagInFiltering(tagName).get(0).click();
             new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(
                     driver.findElement(By.xpath("//*[contains(text(),'Loading articles...')]"))));
-        } else { Assert.fail("Tag " + tagName + "is absent in filtering."); }
+        } else { Assert.fail("Tag " + tagName + " is absent in filtering."); }
     }
 
     public List<WebElement> getAllFoundTagsOnPage() {
